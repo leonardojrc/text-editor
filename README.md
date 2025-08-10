@@ -433,10 +433,9 @@ MIT License - Libre para uso comercial y personal.
 
 ## 📞 Soporte
 
-- 🎮 **Demo**: [Prueba en vivo](demo.html)
+- 🎮 **Demo**: [Prueba en vivo](https://leonardojrc.github.io/text-editor/demo.html)
 - 🐛 **Bugs**: [Abrir issue](../../issues)
 - 💡 **Ideas**: [Discussions](../../discussions)  
-- 📧 **Email**: tu-email@ejemplo.com
 
 ---
 
