@@ -84,7 +84,6 @@ Formato básico de texto con colores avanzados.
 
 **Funcionalidades:**
 - Negrita, cursiva, subrayado, tachado
-- Superíndice, subíndice
 - Botones split de color (texto y fondo)
 - Paleta de colores predefinida + selector personalizado
 
@@ -111,7 +110,6 @@ Creación de listas estructuradas.
 **Funcionalidades:**
 - Listas con viñetas (ul)
 - Listas numeradas (ol)
-- Anidación automática
 
 **Configuración:**
 ```javascript
