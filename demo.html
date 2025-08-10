@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor - Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 20px;
+            background-color: #f8fafc;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            margin: 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .demo-section h2 {
+            margin: 0 0 20px 0;
+            color: #2d3748;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        
+        .demo-section p {
+            color: #718096;
+            margin-bottom: 20px;
+        }
+        
+        .editor-container {
+            margin: 20px 0;
+        }
+        
+        .editor-label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .plugin-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .plugin-tag {
+            background: #e6fffa;
+            color: #0f766e;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .code-example pre {
+            margin: 0;
+            padding: 0;
+            background: none;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        .code-example code {
+            font-family: inherit;
+            font-size: inherit;
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #fed7d7;
+            margin: 20px 0;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Text Editor Library</h1>
+            <p>Demo de la nueva arquitectura modular con plugins</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🚀 Editor Completo - Todos los Plugins</h2>
+            <p>Este editor incluye todas las funcionalidades disponibles.</p>
+            
+            <div class="plugin-list">
+                <span class="plugin-tag">History</span>
+                <span class="plugin-tag">Formatting</span>
+                <span class="plugin-tag">Alignment</span>
+                <span class="plugin-tag">Lists</span>
+                <span class="plugin-tag">Tables</span>
+                <span class="plugin-tag">Images</span>
+                <span class="plugin-tag">Links</span>
+                <span class="plugin-tag">Code View</span>
+            </div>
+            
+            <div class="editor-container">
+                <label class="editor-label">Editor completo:</label>
+                <div id="editor-full">
+                    <div class="loading">Cargando editor...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>✏️ Editor Básico - Solo Formato</h2>
+            <p>Editor minimalista con solo las funciones de formato básico.</p>
+            
+            <div class="plugin-list">
+                <span class="plugin-tag">History</span>
+                <span class="plugin-tag">Formatting</span>
+            </div>
+            
+            <div class="editor-container">
+                <label class="editor-label">Editor básico:</label>
+                <div id="editor-basic">
+                    <div class="loading">Cargando editor...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📝 Editor para Documentos</h2>
+            <p>Editor optimizado para redacción de documentos con funcionalidad multimedia.</p>
+            
+            <div class="plugin-list">
+                <span class="plugin-tag">History</span>
+                <span class="plugin-tag">Formatting</span>
+                <span class="plugin-tag">Alignment</span>
+                <span class="plugin-tag">Lists</span>
+                <span class="plugin-tag">Images</span>
+                <span class="plugin-tag">Links</span>
+            </div>
+            
+            <div class="editor-container">
+                <label class="editor-label">Editor para documentos:</label>
+                <div id="editor-document">
+                    <div class="loading">Cargando editor...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>� Integración con Formularios</h2>
+            <p>El editor se puede aplicar directamente sobre elementos de formulario existentes:</p>
+            
+            <!-- Formulario de ejemplo -->
+            <form id="demo-form" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <h3>Formulario de Artículo</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="titulo">Título:</label><br>
+                    <input type="text" id="titulo" name="titulo" placeholder="Escribe un título genial" 
+                           value="Mi primer artículo" style="width: 100%; padding: 8px; margin-top: 5px;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="contenido">Contenido:</label><br>
+                    <textarea id="contenido" name="contenido" placeholder="Escribe el contenido de tu artículo aquí..."
+                              style="width: 100%; height: 100px; padding: 8px; margin-top: 5px; resize: vertical;">Este es un <strong>contenido inicial</strong> con <em>formato</em> que viene de la base de datos.</textarea>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="resumen">Resumen:</label><br>
+                    <textarea id="resumen" name="resumen" placeholder="Un breve resumen..."
+                              style="width: 100%; height: 60px; padding: 8px; margin-top: 5px; resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" style="background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+                    Guardar Artículo
+                </button>
+                
+                <button type="button" id="show-form-data" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+                    Ver Datos del Formulario
+                </button>
+            </form>
+            
+            <!-- Resultado del formulario -->
+            <div id="form-result" style="background: #e9ecef; padding: 15px; border-radius: 4px; display: none;">
+                <h4>📤 Datos que se enviarían:</h4>
+                <pre id="form-data" style="background: white; padding: 10px; border-radius: 4px; overflow-x: auto;"></pre>
+            </div>
+            
+            <div class="code-example" style="margin-top: 20px;">
+<pre><code>&lt;!-- El editor se aplica directamente al textarea --&gt;
+&lt;textarea name="contenido" placeholder="Tu contenido aquí..."&gt;
+    Contenido inicial desde BD
+&lt;/textarea&gt;
+
+&lt;script&gt;
+// ¡Así de simple! El editor toma el placeholder y valor inicial del textarea
+new TextEditor('textarea[name="contenido"]', {
+    plugins: ['history', 'formatting', 'alignment', 'lists']
+});
+&lt;/script&gt;</code></pre>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>�📊 Uso de la Librería</h2>
+            <p>Integrar el editor en tu proyecto es súper simple:</p>
+            
+            <div class="code-example">
+<pre><code>&lt;!-- 1. Incluir la librería --&gt;
+&lt;script src="text-editor/text-editor.js"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Crear un contenedor --&gt;
+&lt;div id="mi-editor"&gt;&lt;/div&gt;
+
+&lt;!-- 3. Inicializar --&gt;
+&lt;script&gt;
+new TextEditor('#mi-editor', {
+    plugins: ['formatting', 'alignment', 'lists', 'tables', 'history', 'images', 'links'],
+    theme: 'default',
+    placeholder: 'Escribe tu contenido...',
+    height: 300,
+    codeView: 'modal'  // 'modal' o 'inline' - sin esta propiedad no hay botón
+});
+&lt;/script&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluir la librería -->
+    <script src="text-editor/text-editor.js"></script>
+    
+    <script>
+        // Función para mostrar errores
+        function showError(containerId, error) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div class="error-message">
+                    <strong>Error cargando editor:</strong><br>
+                    ${error.message}
+                </div>
+            `;
+        }
+        
+        // Inicializar editores cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Iniciando carga de editores...');
+            
+            // Verificar si TextEditor está disponible
+            if (typeof TextEditor === 'undefined') {
+                console.error('❌ TextEditor no está definido');
+                ['editor-full', 'editor-basic', 'editor-document'].forEach(id => {
+                    showError(id, new Error('TextEditor library no pudo cargarse'));
+                });
+                return;
+            }
+            
+            try {
+                // Editor completo
+                console.log('📝 Creando editor completo...');
+                const editorFull = new TextEditor('#editor-full', {
+                    plugins: ['history', 'formatting', 'alignment', 'lists', 'tables', 'images', 'links'],
+                    placeholder: 'Editor completo con todas las funcionalidades...',
+                    codeView: 'modal'  // 'disabled', 'modal', 'inline'
+                });
+                console.log('✅ Editor completo creado:', editorFull.id);
+                
+                // Editor básico
+                console.log('📝 Creando editor básico...');
+                const editorBasic = new TextEditor('#editor-basic', {
+                    plugins: ['history', 'formatting'],
+                    placeholder: 'Editor básico solo con formato...',
+                    height: 200
+                    // Sin codeView - no tendrá botón de código
+                });
+                console.log('✅ Editor básico creado:', editorBasic.id);
+                
+                // Editor para documentos
+                console.log('📝 Creando editor para documentos...');
+                const editorDocument = new TextEditor('#editor-document', {
+                    plugins: ['history', 'formatting', 'alignment', 'lists', 'images', 'links'],
+                    placeholder: 'Editor para documentos con multimedia...',
+                    height: 250,
+                    codeView: 'inline'
+                });
+                console.log('✅ Editor para documentos creado:', editorDocument.id);
+                
+                // 🔥 NUEVO: Editores sobre elementos de formulario
+                console.log('📝 Creando editores sobre formulario...');
+                
+                // Editor sobre input text (título)
+                const editorTitulo = new TextEditor('#titulo', {
+                    plugins: ['history', 'formatting'],
+                    height: 40
+                    // Sin codeView - no tendrá botón de código
+                });
+                console.log('✅ Editor título creado:', editorTitulo.id);
+                
+                // Editor sobre textarea con contenido inicial (contenido principal)
+                const editorContenido = new TextEditor('#contenido', {
+                    plugins: ['history', 'formatting', 'alignment', 'lists'],
+                    height: 200,
+                    codeView: 'modal'
+                });
+                console.log('✅ Editor contenido creado:', editorContenido.id);
+                
+                // Editor sobre textarea vacío (resumen)
+                const editorResumen = new TextEditor('#resumen', {
+                    plugins: ['history', 'formatting'],
+                    height: 80
+                    // Sin codeView - no tendrá botón de código
+                });
+                console.log('✅ Editor resumen creado:', editorResumen.id);
+                
+                console.log('✅ Todos los editores creados exitosamente');
+                
+                // Manejar formulario para demostración
+                setupFormDemo();
+                
+            } catch (error) {
+                console.error('❌ Error creando editores:', error);
+                ['editor-full', 'editor-basic', 'editor-document'].forEach(id => {
+                    showError(id, error);
+                });
+            }
+        });
+        
+        // Configurar demo del formulario
+        function setupFormDemo() {
+            const form = document.getElementById('demo-form');
+            const showDataBtn = document.getElementById('show-form-data');
+            const resultDiv = document.getElementById('form-result');
+            const formDataPre = document.getElementById('form-data');
+            
+            // Mostrar datos del formulario sin enviar
+            showDataBtn.addEventListener('click', () => {
+                const formData = new FormData(form);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+                
+                formDataPre.textContent = JSON.stringify(data, null, 2);
+                resultDiv.style.display = 'block';
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Manejar submit del formulario
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+                
+                alert('📤 Formulario enviado! Ver consola para datos completos.');
+                console.log('📤 Datos del formulario:', data);
+                
+                formDataPre.textContent = JSON.stringify(data, null, 2);
+                resultDiv.style.display = 'block';
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>

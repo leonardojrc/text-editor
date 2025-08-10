@@ -1,0 +1,1065 @@
+/**
+ * Text Editor - Default Theme
+ * Variables CSS para personalización fácil
+ */
+
+:root {
+    /* Colores principales */
+    --te-toolbar-bg: #f7f7fa;
+    --te-toolbar-border: #ccc;
+    --te-editor-bg: #fff;
+    --te-editor-border: #ccc;
+    --te-text-color: #333;
+    
+    /* Botones */
+    --te-button-bg: #fff;
+    --te-button-border: #ddd;
+    --te-button-hover-bg: #f5f5f5;
+    --te-button-active-bg: #e8f0fe;
+    --te-button-active-border: #4285f4;
+    --te-button-active-color: #174ea6;
+    --te-button-active-shadow: 0 0 0 1.5px #c6dafc;
+    
+    /* Estados */
+    --te-button-disabled-opacity: 0.45;
+    --te-separator-color: #ddd;
+    --te-placeholder-color: #999;
+    
+    /* Dimensiones */
+    --te-border-radius: 10px;
+    --te-button-radius: 6px;
+    --te-toolbar-padding: 6px 8px 4px 8px;
+    --te-editor-padding: 10px;
+    --te-icon-size: 18px;
+}
+
+/* Contenedor principal del editor */
+.text-editor {
+    font-family: system-ui, -apple-system, sans-serif;
+    border-radius: var(--te-border-radius);
+    overflow: visible; /* 🔥 Permitir que dropdowns se muestren completamente */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Toolbar */
+.text-editor__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+    background: var(--te-toolbar-bg);
+    border: 1px solid var(--te-toolbar-border);
+    border-bottom: none;
+    border-radius: var(--te-border-radius) var(--te-border-radius) 0 0;
+    padding: var(--te-toolbar-padding);
+    box-sizing: border-box;
+    overflow: visible; /* 🔥 Permitir dropdowns completos */
+}
+
+/* Separador de toolbar */
+.text-editor__divider {
+    width: 100%;
+    height: 1.5px;
+    background: linear-gradient(to right, #e0e0e6 0%, #e8e8ee 100%);
+    border: none;
+    margin: 0;
+}
+
+/* Wrapper del editor */
+.text-editor__editor-wrapper {
+    position: relative;
+}
+
+/* Botones de toolbar */
+.text-editor__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border: 1px solid var(--te-button-border);
+    border-radius: var(--te-button-radius);
+    background: var(--te-button-bg);
+    color: var(--te-text-color);
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.text-editor__button:hover:not(:disabled) {
+    background: var(--te-button-hover-bg);
+}
+
+.text-editor__button[aria-pressed="true"] {
+    background: var(--te-button-active-bg);
+    border-color: var(--te-button-active-border);
+    color: var(--te-button-active-color);
+    box-shadow: var(--te-button-active-shadow);
+}
+
+.text-editor__button:disabled {
+    opacity: var(--te-button-disabled-opacity);
+    background: var(--te-button-bg) !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    user-select: none;
+    border-color: var(--te-button-border) !important;
+    color: var(--te-text-color) !important;
+    box-shadow: none !important;
+}
+
+/* Estilos generales para botones deshabilitados */
+.te-btn:disabled {
+    opacity: var(--te-button-disabled-opacity) !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+/* Anular hover en todos los botones deshabilitados */
+button:disabled:hover {
+    background: var(--te-button-bg) !important;
+    border-color: var(--te-button-border) !important;
+    box-shadow: none !important;
+    opacity: var(--te-button-disabled-opacity) !important;
+}
+
+/* Estilos específicos para dropdowns deshabilitados */
+.te-color-dropdown-btn:disabled {
+    opacity: var(--te-button-disabled-opacity) !important;
+    background: none !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    color: var(--te-text-color) !important;
+}
+
+.te-color-dropdown-btn:disabled:hover {
+    background: none !important;
+    color: var(--te-text-color) !important;
+    opacity: var(--te-button-disabled-opacity) !important;
+}
+
+.te-color-dropdown-btn:disabled .te-dropdown-arrow {
+    opacity: var(--te-button-disabled-opacity) !important;
+}
+
+/* Separadores entre grupos de botones */
+.text-editor__separator {
+    width: 1px;
+    height: 22px;
+    background: var(--te-separator-color);
+    margin: 0 4px;
+}
+
+/* Iconos */
+.text-editor__icon {
+    width: var(--te-icon-size);
+    height: var(--te-icon-size);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Área de edición */
+.text-editor__content {
+    border: 1px solid var(--te-editor-border);
+    border-top: none;
+    min-height: 300px;
+    padding: var(--te-editor-padding);
+    border-radius: 0 0 var(--te-border-radius) var(--te-border-radius);
+    background: var(--te-editor-bg);
+    color: var(--te-text-color);
+    box-sizing: border-box;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+}
+
+/* Placeholder usando elemento separado */
+.text-editor__placeholder {
+    position: absolute;
+    top: var(--te-editor-padding);
+    left: var(--te-editor-padding);
+    color: var(--te-placeholder-color);
+    font-style: italic;
+    pointer-events: none;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: inherit;
+}
+
+.text-editor__content:focus {
+    outline: none;
+    border-color: var(--te-button-active-border);
+}
+
+/* Estilos para el contenido del editor */
+.text-editor__content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.text-editor__content td,
+.text-editor__content th {
+    border: 1px solid #999;
+    padding: 8px;
+    text-align: left;
+}
+
+.text-editor__content th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Listas */
+.text-editor__content ul,
+.text-editor__content ol {
+    padding-left: 30px;
+    margin: 10px 0;
+}
+
+.text-editor__content li {
+    margin: 5px 0;
+}
+
+/* Párrafos */
+.text-editor__content p {
+    margin: 10px 0;
+}
+
+.text-editor__content p:first-child {
+    margin-top: 0;
+}
+
+.text-editor__content p:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   COMPONENTE: Split Button
+   Botón dividido con acción principal + dropdown
+   Reutilizable para cualquier plugin
+   ============================================ */
+
+/* Contenedor del split button */
+.te-split-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--te-button-border);
+    border-radius: var(--te-button-radius);
+    background: var(--te-button-bg);
+    overflow: visible;
+    z-index: 1;
+}
+
+/* Split button cuando el dropdown está activo */
+.te-split-btn.te-dropdown-active {
+    z-index: 999999 !important; /* 🔥 Elevar z-index cuando dropdown activo */
+}
+
+/* Botón principal del split */
+.te-split-btn-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--te-text-color);
+    transition: all 0.2s;
+}
+
+/* Botón dropdown del split */
+.te-split-btn-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
+    border: none;
+    border-left: 1px solid var(--te-button-border);
+    background: none;
+    cursor: pointer;
+    color: var(--te-text-color);
+    transition: all 0.2s;
+    font-size: 10px;
+}
+
+/* Estados hover del contenedor */
+.te-split-btn:hover {
+    background: var(--te-button-hover-bg);
+}
+
+/* Estados cuando hay selección activa */
+.te-split-btn.has-selection {
+    background: var(--te-button-active-bg);
+    border-color: var(--te-button-active-border);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.te-split-btn.has-selection:hover {
+    background: var(--te-button-hover-bg);
+}
+
+/* Estados hover individuales cuando hay selección */
+.te-split-btn.has-selection .te-split-btn-main:hover,
+.te-split-btn.has-selection .te-split-btn-dropdown:hover {
+    background: var(--te-button-hover-bg);
+}
+
+/* Estados deshabilitados - MÁXIMA PRIORIDAD */
+.te-split-btn .te-split-btn-main:disabled,
+.te-split-btn .te-split-btn-dropdown:disabled {
+    opacity: var(--te-button-disabled-opacity) !important;
+    background: var(--te-button-bg) !important;
+    border-color: var(--te-button-border) !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+}
+
+/* Solo aplicar pointer-events: none cuando el contenedor está marcado como disabled */
+.te-split-btn.disabled {
+    opacity: var(--te-button-disabled-opacity) !important;
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+}
+
+.te-split-btn.disabled,
+.te-split-btn.disabled:hover {
+    background: var(--te-button-bg) !important;
+    border-color: var(--te-button-border) !important;
+    box-shadow: none !important;
+}
+
+/* Anular estados interactivos solo cuando están realmente deshabilitados */
+.te-split-btn .te-split-btn-main:disabled:hover,
+.te-split-btn .te-split-btn-main:disabled:focus,
+.te-split-btn .te-split-btn-main:disabled:active,
+.te-split-btn .te-split-btn-dropdown:disabled:hover,
+.te-split-btn .te-split-btn-dropdown:disabled:focus,
+.te-split-btn .te-split-btn-dropdown:disabled:active,
+.te-split-btn.disabled:hover,
+.te-split-btn.disabled.has-selection,
+.te-split-btn.disabled.has-selection:hover {
+    opacity: var(--te-button-disabled-opacity) !important;
+    background: var(--te-button-bg) !important;
+    border-color: var(--te-button-border) !important;
+    color: var(--te-text-color) !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+    pointer-events: none !important;
+}
+
+/* Icono dentro del split button */
+.te-split-btn .te-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+/* ============================================
+   IMPLEMENTACIÓN: Botones de Color
+   Usar el componente split-button
+   ============================================ */
+
+/* Los botones de color ahora usan las clases split-btn */
+/* En JavaScript, cambiar:
+   te-color-wrapper → te-split-btn
+   te-color-main-btn → te-split-btn-main  
+   te-color-dropdown-btn → te-split-btn-dropdown
+*/
+
+/* Estado activo del dropdown */
+.te-color-dropdown-btn.active {
+    background: var(--te-button-active-bg);
+    color: var(--te-button-active-color);
+}
+
+/* Dropdown de color */
+.te-color-dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    background: white;
+    border: 2px solid var(--te-toolbar-border);
+    border-radius: var(--te-button-radius);
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 999999 !important; /* 🔥 Z-index muy alto para estar sobre otros editores */
+    min-width: 180px;
+    margin-top: 0;
+    /* display: none; - Manejado por JavaScript */
+    display: none;
+}
+
+/* Clase para mostrar dropdown */
+.te-color-dropdown.te-dropdown-visible {
+    display: block !important;
+}
+
+/* Muestras de color */
+.te-color-swatch {
+    border: 1px solid var(--te-button-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    position: relative;
+}
+
+.te-color-swatch:hover {
+    border-color: var(--te-button-active-border);
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.te-color-swatch:active {
+    transform: scale(0.98);
+}
+
+/* Botón "Sin color" */
+.te-no-color {
+    background: none !important;
+    border: 1px dashed var(--te-button-border) !important;
+    color: var(--te-text-color);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+}
+
+.te-no-color:hover {
+    background: var(--te-button-hover-bg) !important;
+    border-style: solid !important;
+    border-color: var(--te-button-active-border) !important;
+}
+
+/* Input de color personalizado */
+.te-custom-color {
+    border: 1px solid var(--te-button-border);
+    border-radius: 4px;
+    background: var(--te-editor-bg);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    padding: 0;
+}
+
+.te-custom-color:hover {
+    border-color: var(--te-button-active-border);
+}
+
+.te-custom-color:focus {
+    outline: none;
+    border-color: var(--te-button-active-border);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+/* Flecha de dropdown en botones de color */
+.te-dropdown-arrow {
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.te-color-dropdown-btn:hover .te-dropdown-arrow {
+    opacity: 1;
+}
+
+/* Botón de código HTML */
+.text-editor__button[data-code-toggle="true"] {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.text-editor__button--active {
+    background: var(--te-button-active-bg) !important;
+    border-color: var(--te-button-active-border) !important;
+    color: var(--te-button-active-color) !important;
+    box-shadow: var(--te-button-active-shadow) !important;
+}
+
+/* Textarea para código HTML */
+.text-editor__code-textarea {
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace !important;
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    padding: 10px !important;
+    background: #f8f9fa !important;
+    color: #333 !important;
+    border: none !important;
+    outline: none !important;
+    resize: vertical !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.text-editor__code-textarea:focus {
+    background: #fff !important;
+    box-shadow: inset 0 0 0 2px var(--te-button-active-border) !important;
+}
+
+/* Modales */
+.te-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.te-modal {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.te-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 0 24px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+
+.te-modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.te-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #718096;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.te-modal-close:hover {
+    background: #f7fafc;
+    color: #2d3748;
+}
+
+.te-modal-body {
+    padding: 0 24px;
+}
+
+.te-modal-field {
+    margin-bottom: 16px;
+}
+
+.te-modal-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #2d3748;
+    font-size: 0.9rem;
+}
+
+.te-modal-field input,
+.te-modal-field select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d2d6dc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.te-modal-field input:focus,
+.te-modal-field select:focus {
+    outline: none;
+    border-color: var(--te-button-active-border);
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.te-modal-row {
+    display: flex;
+    gap: 16px;
+}
+
+.te-modal-row .te-modal-field {
+    flex: 1;
+}
+
+.te-modal-checkbox {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal !important;
+}
+
+.te-modal-checkbox input[type="checkbox"] {
+    width: auto !important;
+    margin-right: 8px;
+    margin-bottom: 0;
+}
+
+.te-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 24px;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 20px;
+}
+
+/* Modal button base reset */
+.te-modal button {
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.te-modal-btn {
+    padding: 8px 16px;
+    border: 1px solid #d2d6dc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+}
+
+.te-modal-btn-secondary {
+    background: white !important;
+    color: #374151 !important;
+    border-color: #d2d6dc !important;
+}
+
+.te-modal-btn-secondary:hover {
+    background: #f9fafb !important;
+    border-color: #9ca3af !important;
+}
+
+.te-modal-btn-primary {
+    background: #4285f4 !important;
+    color: white !important;
+    border-color: #4285f4 !important;
+}
+
+.te-modal-btn-primary:hover {
+    background: #1a73e8 !important;
+    border-color: #1a73e8 !important;
+}
+
+.te-modal-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ============================================
+   TABLES PLUGIN STYLES
+   Grid selector and contextual menu for tables
+   ============================================ */
+
+/* Table Grid Dropdown */
+.te-table-grid-dropdown {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    background: white;
+    border: 2px solid var(--te-toolbar-border);
+    border-radius: var(--te-button-radius);
+    padding: 12px 16px 16px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 999999 !important;
+    min-width: 220px;
+    margin-top: 0;
+    display: none;
+}
+
+/* Table Grid Container */
+.te-table-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 20px);
+    grid-template-rows: repeat(10, 20px);
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+/* Grid Cells */
+.te-table-grid-cell {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.te-table-grid-cell:hover {
+    border-color: #4285f4;
+}
+
+.te-table-grid-cell.te-grid-highlighted {
+    background: #e8f0fe;
+    border-color: #4285f4;
+}
+
+/* Grid Label */
+.te-table-grid-label {
+    font-size: 13px;
+    color: #444;
+    text-align: center;
+    min-height: 18px;
+    font-weight: 500;
+}
+
+/* Table Context Menu */
+.te-table-menu {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    background: white;
+    border: 2px solid var(--te-toolbar-border);
+    border-radius: var(--te-button-radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 999999 !important;
+    min-width: 200px;
+    padding: 6px;
+    display: none;
+}
+
+.te-table-menu button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--te-text-color);
+    transition: background 0.15s;
+    display: block;
+    margin: 1px 0;
+}
+
+.te-table-menu button:hover {
+    background: var(--te-button-hover-bg);
+}
+
+.te-table-menu button:active {
+    background: var(--te-button-active-bg);
+}
+
+/* Menu Separator */
+.te-menu-separator {
+    height: 1px;
+    background: var(--te-separator-color);
+    margin: 4px 8px;
+}
+
+/* Table styles in editor content */
+.text-editor__content table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    margin: 8px 0;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Active table highlight */
+.text-editor__content table.table-active {
+    border: 2px solid #4285f4;
+    box-shadow: 0 0 0 1px rgba(66, 133, 244, 0.2);
+}
+
+.text-editor__content table td,
+.text-editor__content table th {
+    border: 1px solid #999;
+    padding: 4px 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    min-height: 1.5em; /* Incrementar altura mínima */
+    height: auto;
+    transition: background-color 0.2s, border-color 0.2s;
+    position: relative;
+}
+
+/* Asegurar que TODAS las celdas tengan altura mínima, no solo las vacías */
+.text-editor__content table td::before,
+.text-editor__content table th::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 1.5em;
+    vertical-align: top;
+}
+
+/* Para celdas con contenido, el ::before no debe interferir */
+.text-editor__content table td:not(:empty)::before,
+.text-editor__content table th:not(:empty)::before {
+    height: 0;
+}
+
+/* Selected cell highlight */
+.text-editor__content td.cell-selected,
+.text-editor__content th.cell-selected {
+    background-color: rgba(66, 133, 244, 0.1);
+    border-color: #4285f4;
+    position: relative;
+}
+
+.text-editor__content td.cell-selected::after,
+.text-editor__content th.cell-selected::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid #4285f4;
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+.text-editor__content table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* ==== ESTILOS PARA PLUGIN DE VISTA DE CÓDIGO ==== */
+
+/* Split button para vista de código */
+.te-code-view-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 150px;
+    padding: 5px 0;
+    margin-top: 2px;
+}
+
+.te-code-view-menu button {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-color);
+    transition: background-color 0.2s;
+}
+
+.te-code-view-menu button:hover {
+    background-color: var(--hover-bg);
+}
+
+.te-code-view-menu hr {
+    margin: 5px 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Modal overlay y modal específicos para código */
+.te-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(2px);
+}
+
+.te-modal {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.te-modal h3 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.te-modal-field {
+    margin-bottom: 16px;
+}
+
+.te-modal-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.te-modal-field textarea {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 12px;
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    resize: vertical;
+    background: #f8f9fa;
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+.te-modal-field textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.te-modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.te-modal-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.te-modal-btn:hover {
+    background: var(--hover-bg);
+    border-color: var(--primary-color);
+}
+
+.te-modal-btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.te-modal-btn-primary:hover {
+    background: #1976d2;
+    border-color: #1976d2;
+}
+
+.te-modal-btn-secondary {
+    background: #f5f5f5;
+    border-color: #ddd;
+}
+
+.te-modal-btn-secondary:hover {
+    background: #eeeeee;
+}
+
+/* Vista inline del editor HTML */
+.te-inline-html-editor {
+    border: 2px solid var(--primary-color) !important;
+    background: #fff !important;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.1);
+}
+
+.te-inline-actions {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.te-inline-actions .te-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Estado activo del botón de código */
+.te-btn-active {
+    background: var(--primary-color) !important;
+    color: white !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Responsive para modal */
+@media (max-width: 600px) {
+    .te-modal {
+        margin: 20px;
+        padding: 20px;
+        max-width: none;
+        width: calc(100vw - 40px);
+    }
+    
+    .te-modal-buttons {
+        flex-direction: column;
+    }
+    
+    .te-modal-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,15 @@
+# Archivos temporales y de desarrollo
+*.tmp
+*.bak
+*~
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de editor
+.vscode/
+.idea/
+
+# Archivos de prueba locales (opcional)
+# test-*.html
