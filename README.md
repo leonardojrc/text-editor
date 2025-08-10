@@ -15,7 +15,7 @@ Una librería moderna y modular para editores de texto enriquecido, construida c
 
 ## 🎮 Demo en Vivo
 
-**[📝 Prueba la demo interactiva](demo.html)**
+**[📝 Prueba la demo interactiva](https://leonardojrc.github.io/text-editor/demo.html)**
 
 Experimenta con todas las funcionalidades directamente en tu navegador:
 - ✏️ Formato de texto completo con colores
